@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bagian B — Perbandingan Asli vs Hasil Ekstraksi</title>
+<style>
+*{box-sizing:border-box;margin:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#101024;color:#eee;padding:24px}
+h1{font-size:1.3rem;margin-bottom:4px} p{color:#9ab;margin-bottom:20px;font-size:.9rem}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px}
+figure img{width:100%;border-radius:8px;display:block;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+figcaption{font-size:.8rem;color:#8aa;margin-top:6px;text-align:center}
+@media(max-width:900px){.pair{grid-template-columns:1fr}}
+</style></head><body>
+<h1>Layout-Aware Text Extraction — Asli vs Hasil</h1>
+<p>Buka pula <code>slide-01.html</code> … <code>slide-05.html</code> untuk versi interaktif (klik teks → Mode Edit).</p>
+
+  <div class="pair">
+    <figure><img src="qa/original-01.png" loading="lazy" alt="Slide 1 asli"><figcaption>Slide 1 — Asli</figcaption></figure>
+    <figure><img src="qa/result-01.png" loading="lazy" alt="Slide 1 hasil ekstraksi HTML"><figcaption>Slide 1 — Hasil ekstraksi (teks = elemen HTML terpisah, background di-inpaint)</figcaption></figure>
+  </div>
+  <div class="pair">
+    <figure><img src="qa/original-02.png" loading="lazy" alt="Slide 2 asli"><figcaption>Slide 2 — Asli</figcaption></figure>
+    <figure><img src="qa/result-02.png" loading="lazy" alt="Slide 2 hasil ekstraksi HTML"><figcaption>Slide 2 — Hasil ekstraksi (teks = elemen HTML terpisah, background di-inpaint)</figcaption></figure>
+  </div>
+  <div class="pair">
+    <figure><img src="qa/original-03.png" loading="lazy" alt="Slide 3 asli"><figcaption>Slide 3 — Asli</figcaption></figure>
+    <figure><img src="qa/result-03.png" loading="lazy" alt="Slide 3 hasil ekstraksi HTML"><figcaption>Slide 3 — Hasil ekstraksi (teks = elemen HTML terpisah, background di-inpaint)</figcaption></figure>
+  </div>
+  <div class="pair">
+    <figure><img src="qa/original-04.png" loading="lazy" alt="Slide 4 asli"><figcaption>Slide 4 — Asli</figcaption></figure>
+    <figure><img src="qa/result-04.png" loading="lazy" alt="Slide 4 hasil ekstraksi HTML"><figcaption>Slide 4 — Hasil ekstraksi (teks = elemen HTML terpisah, background di-inpaint)</figcaption></figure>
+  </div>
+  <div class="pair">
+    <figure><img src="qa/original-05.png" loading="lazy" alt="Slide 5 asli"><figcaption>Slide 5 — Asli</figcaption></figure>
+    <figure><img src="qa/result-05.png" loading="lazy" alt="Slide 5 hasil ekstraksi HTML"><figcaption>Slide 5 — Hasil ekstraksi (teks = elemen HTML terpisah, background di-inpaint)</figcaption></figure>
+  </div>
+</body></html>

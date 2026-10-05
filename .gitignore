@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.env
+assets/
+chroma_db/
+*.pdf
+!part_a_multimodal_rag/assets/.gitkeep
+.venv/
+.ipynb_checkpoints/
+.caption_cache/
+chroma_db/
+*.html
+!part_b_layout_extraction/outputs/*.html
+!part_a_multimodal_rag/app/static/index.html
+!docs/
+!docs/**

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo Web — Multimodal RAG Bank Mandiri</title>
+<style>
+  :root{
+    --bg:#0f172a; --card:#1e293b; --card2:#273449; --line:#3b4a63;
+    --ink:#e2e8f0; --muted:#94a3b8; --brand:#14b8a6; --brand2:#0d9488;
+    --ok:#4ade80; --warn:#fbbf24; --bad:#f87171;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:
+    radial-gradient(1200px 500px at 70% -10%,#134e4a55,transparent),var(--bg);
+    color:var(--ink);min-height:100vh;padding:24px 16px 60px}
+  .wrap{max-width:860px;margin:0 auto}
+  header{margin-bottom:22px}
+  .pill{display:inline-block;background:#134e4a;color:#5eead4;font-size:.75rem;
+    font-weight:700;letter-spacing:.6px;padding:4px 12px;border-radius:999px;margin-bottom:10px}
+  h1{font-size:1.45rem;line-height:1.25}
+  h1 small{display:block;color:var(--muted);font-weight:500;font-size:.85rem;margin-top:6px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px;margin-bottom:16px}
+  .card h2{font-size:1rem;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  .card p.desc{color:var(--muted);font-size:.84rem;margin-bottom:14px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  button{font:inherit;font-weight:700;cursor:pointer;border:0;border-radius:10px;
+    padding:10px 18px;transition:.15s}
+  .btn{background:var(--brand);color:#04211d}
+  .btn:hover{background:var(--brand2);color:#fff}
+  .btn:disabled{opacity:.5;cursor:wait}
+  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--brand)}
+  input[type=file]{color:var(--muted);font-size:.85rem;flex:1;min-width:200px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
+    gap:10px;margin-top:14px}
+  .stat{background:var(--card2);border-radius:10px;padding:10px 12px;text-align:center}
+  .stat b{display:block;font-size:1.25rem;color:#5eead4}
+  .stat span{font-size:.72rem;color:var(--muted)}
+  textarea{width:100%;background:var(--card2);color:var(--ink);border:1.5px solid var(--line);
+    border-radius:10px;padding:12px;font:inherit;resize:vertical;min-height:74px}
+  textarea:focus{outline:none;border-color:var(--brand)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+  .chip{background:var(--card2);border:1px solid var(--line);color:var(--ink);
+    font-size:.78rem;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer}
+  .chip:hover{border-color:var(--brand);color:#5eead4}
+  .answer{background:var(--card2);border-left:4px solid var(--brand);border-radius:10px;
+    padding:14px;margin-top:14px;white-space:pre-wrap;line-height:1.55;font-size:.92rem;
+    display:none}
+  .srcs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .src{background:#134e4a;color:#5eead4;font-size:.74rem;font-weight:700;
+    padding:4px 10px;border-radius:999px}
+  .meta{color:var(--muted);font-size:.75rem;margin-top:10px}
+  .hit{border-top:1px dashed var(--line);padding-top:10px;margin-top:10px;
+    font-size:.84rem;color:var(--muted)}
+  .kbbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  select{background:var(--card2);color:var(--ink);border:1.5px solid var(--line);
+    border-radius:10px;padding:8px 10px;font:inherit;font-size:.85rem}
+  .kbitem{background:var(--card2);border:1px solid var(--line);border-radius:10px;
+    padding:12px;margin-bottom:10px;font-size:.85rem}
+  .kbitem .tag{font-size:.7rem;font-weight:800;letter-spacing:.4px;padding:2px 9px;
+    border-radius:999px;margin-right:8px;vertical-align:1px}
+  .tag-text{background:#1e3a5f;color:#7db4f5}.tag-table{background:#3b2f63;color:#c4b0f7}
+  .tag-figure{background:#134e4a;color:#5eead4}
+  .kbitem pre{white-space:pre-wrap;font-family:inherit;color:var(--muted);margin-top:8px;line-height:1.5}
+  .kbitem table{border-collapse:collapse;margin-top:8px;font-size:.76rem;width:100%}
+  .kbitem th,.kbitem td{border:1px solid var(--line);padding:4px 7px;text-align:left;color:var(--ink)}
+  .kbitem th{color:#7db4f5;font-weight:700}
+  details.ctx{margin-top:12px;border:1px dashed var(--line);border-radius:10px;padding:8px 12px}
+  details.ctx summary{cursor:pointer;font-size:.82rem;color:var(--muted);font-weight:600}
+  .ctxitem{border-top:1px dashed var(--line);margin-top:8px;padding-top:8px;font-size:.82rem;color:var(--muted)}
+  .ctxitem b{color:var(--ink)}
+  .hit b{color:var(--ink)}
+  .status{font-size:.82rem;margin-top:10px}
+  .ok{color:var(--ok)} .warn{color:var(--warn)} .bad{color:var(--bad)}
+  .spin{display:inline-block;width:14px;height:14px;border:2px solid #5eead4;
+    border-top-color:transparent;border-radius:50%;animation:r 0.8s linear infinite;
+    vertical-align:-2px;margin-right:6px}
+  @keyframes r{to{transform:rotate(360deg)}}
+  footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:26px}
+  footer a{color:#5eead4;text-decoration:none}
+  .links{display:flex;gap:14px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="pill">TECHNICAL TEST · AI ENGINEER</span>
+    <h1>Multimodal RAG — Laporan Bank Mandiri 2025
+      <small>Upload PDF → parsing teks + tabel + caption visual (VLM) → chunking → embedding → ChromaDB. Lalu tanya apa saja, jawaban menyertakan halaman sumber.</small>
+    </h1>
+  </header>
+
+  <!-- INGESTION -->
+  <div class="card">
+    <h2>📥 A1 · Endpoint Ingestion — Upload &amp; Process File <span style="color:var(--muted);font-weight:400;font-size:.75rem">(POST /api/ingest)</span></h2>
+    <p class="desc">Unggah PDF laporan. Semua halaman diparse multimodal; chart &amp; infografis dibaca oleh vision model.</p>
+    <div class="row">
+      <input type="file" id="file" accept="application/pdf">
+      <button class="btn" id="ingestBtn">Proses PDF</button>
+    </div>
+    <div class="status" id="ingestStatus"></div>
+    <div class="stats" id="ingestStats"></div>
+  </div>
+
+  <!-- KNOWLEDGE BASE EXPLORER -->
+  <div class="card">
+    <h2>📚 Hasil Parsing Multimodal — Knowledge Base <span style="color:var(--muted);font-weight:400;font-size:.75rem">(GET /api/kb)</span></h2>
+    <p class="desc">Bukti kemampuan multimodal: <b>teks</b> terekstrak, <b>struktur tabel</b> dipertahankan, <b>chart/infografis</b> diinterpretasi VLM menjadi teks yang bisa dicari — semuanya bermetadata halaman.</p>
+    <div class="kbbar" id="kbBar" style="display:none">
+      <select id="kbPage" aria-label="Pilih halaman"></select>
+      <select id="kbType" aria-label="Filter jenis konten">
+        <option value="">Semua jenis</option>
+        <option value="text">📄 Teks</option>
+        <option value="table">📊 Tabel</option>
+        <option value="figure">🖼️ Visual / caption VLM</option>
+      </select>
+      <span class="meta" id="kbMeta" style="align-self:center"></span>
+    </div>
+    <div class="status" id="kbStatus"></div>
+    <div id="kbList"></div>
+  </div>
+
+  <!-- QUERY -->
+  <div class="card">
+    <h2>💬 A2 · Endpoint Query — Menjawab Pertanyaan <span style="color:var(--muted);font-weight:400;font-size:.75rem">(POST /api/query)</span></h2>
+    <p class="desc">Retrieval → grading (LangGraph) → sintesis jawaban oleh LLM — hanya dari isi dokumen.</p>
+    <textarea id="q" placeholder="Tulis pertanyaan… mis. Apa saja peran Unit Pelindungan Nasabah menurut POJK No. 22 Tahun 2023?"></textarea>
+    <div class="chips" id="chips"></div>
+    <div class="row">
+      <button class="btn" id="askBtn">Tanya AI</button>
+      <span class="meta" id="qMeta"></span>
+    </div>
+    <div class="answer" id="answer"></div>
+    <div class="srcs" id="srcs"></div>
+    <div id="ctxBox"></div>
+    <div id="hits"></div>
+  </div>
+
+  <!-- PART B -->
+  <div class="card">
+    <h2>🖼️ B · Layout Aware Text Extraction (Computer Vision)</h2>
+    <p class="desc">Hasil konversi 5 slide presentasi menjadi HTML — <b>Background Layer</b> (gambar, teks asli dihapus via inpainting) + <b>Text Layer</b> (&lt;span&gt; diposisikan per bounding box, warna &amp; ukuran font terdeteksi). Coba tombol 🖼️ Background (Asli↔Bersih) dan ✏️ Mode Edit.</p>
+    <div class="links">
+      <a class="chip" href="/part-b/compare.html" target="_blank">📊 Galeri asli vs hasil</a>
+      <a class="chip" href="/part-b/slide-01.html" target="_blank">Slide 1</a>
+      <a class="chip" href="/part-b/slide-02.html" target="_blank">Slide 2</a>
+      <a class="chip" href="/part-b/slide-03.html" target="_blank">Slide 3</a>
+      <a class="chip" href="/part-b/slide-04.html" target="_blank">Slide 4</a>
+      <a class="chip" href="/part-b/slide-05.html" target="_blank">Slide 5</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="links">
+      <a href="/docs" target="_blank">⚡ Swagger API</a>
+      <a href="/api/health" target="_blank">❤️ Health</a>
+      <a href="https://github.com/tixo831/Mandiri-AI" target="_blank">🐙 Source code</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const QUICK=[
+ "Apa saja peran Unit Pelindungan Nasabah menurut POJK No. 22 Tahun 2023?",
+ "Apakah penagihan boleh dilakukan pada jam 21.00?",
+ "Berapa nominal dan persentase pertumbuhan kredit sektor tambang dan konstruksi?",
+ "Sebutkan persentase komposisi DPK tahun 2024 dan 2025!",
+ "Bagaimana alur penanganan nasabah jika ada laporan pengaduan?",
+ "Apa saja saluran pengaduan yang disediakan Bank Mandiri?"
+];
+$('chips').innerHTML=QUICK.map((q,i)=>`<span class="chip" data-q="${i}">${q.slice(0,42)}…</span>`).join('');
+document.querySelectorAll('.chip[data-q]').forEach(c=>c.onclick=()=>{$('q').value=QUICK[c.dataset.q];ask();});
+
+function mdTable(text){
+  const lines=text.trim().split('\n').filter(l=>l.trim().startsWith('|'));
+  if(lines.length<2)return null;
+  const rows=lines.map(l=>l.trim().replace(/^\||\|$/g,'').split('|').map(c=>c.trim()))
+    .filter(r=>!r.every(c=>/^:?-{2,}:?$/.test(c)||c===''));
+  if(rows.length<2)return null;
+  let h='<table><tr>'+rows[0].map(c=>'<th>'+c+'</th>').join('')+'</tr>';
+  for(const r of rows.slice(1))h+='<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>';
+  return h+'</table>';
+}
+const TAG={text:['tag tag-text','TEKS'],table:['tag tag-table','TABEL'],figure:['tag tag-figure','VISUAL/VLM']};
+
+async function loadKB(){
+  try{
+    const d=await (await fetch('/api/kb')).json();
+    if(!d.count){$('kbStatus').innerHTML='<span class="warn">Belum ada data — unggah PDF dulu di atas.</span>';return;}
+    $('kbStatus').innerHTML='';$('kbBar').style.display='flex';
+    const pages=d.pages;
+    $('kbPage').innerHTML=pages.map(p=>`<option value="${p}">📄 Halaman ${p}</option>`).join('');
+    const render=()=>{
+      const pg=$('kbPage').value?+$('kbPage').value:pages[0], ty=$('kbType').value;
+      const items=(d.by_page[pg]||[]).filter(c=>!ty||c.type===ty);
+      $('kbMeta').textContent=items.length+' item';
+      $('kbList').innerHTML=items.map(c=>{
+        const t=TAG[c.type]||TAG.text;
+        const body=c.type==='table'?(mdTable(c.content)||'<pre>'+c.content+'</pre>')
+          :'<pre>'+c.content.slice(0,700)+(c.content.length>700?'…':'')+'</pre>';
+        return `<div class="kbitem"><span class="${t[0]}">${t[1]}</span><b>Hal ${c.page}</b> · <span style="color:var(--muted);font-size:.75rem">${c.id}</span>${body}</div>`;
+      }).join('')||'<div class="status"><span class="warn">Tidak ada item jenis ini di halaman tsb.</span></div>';
+    };
+    $('kbPage').onchange=render;$('kbType').onchange=render;render();
+  }catch(e){$('kbStatus').innerHTML='<span class="bad">Gagal memuat KB: '+e.message+'</span>';}
+}
+
+async function health(){
+  try{
+    const d=await (await fetch('/api/health')).json();
+    if(d.indexed_chunks>0){
+      $('ingestStatus').innerHTML=`<span class="ok">✓ Knowledge base siap — ${d.indexed_chunks} chunk terindeks</span>`;
+      loadKB();
+    }
+  }catch(e){}
+}
+health();
+
+$('ingestBtn').onclick=async()=>{
+  const f=$('file').files[0];
+  if(!f){$('ingestStatus').innerHTML='<span class="warn">Pilih file PDF dulu.</span>';return;}
+  $('ingestBtn').disabled=true;
+  $('ingestStatus').innerHTML='<span class="spin"></span>Memproses: parsing → caption visual → chunking → embedding… (±10 dtk)';
+  $('ingestStats').innerHTML='';
+  try{
+    const fd=new FormData();fd.append('file',f);
+    const t0=performance.now();
+    const d=await (await fetch('/api/ingest',{method:'POST',body:fd})).json();
+    if(d.status!=='ok')throw new Error(d.detail||'gagal');
+    $('ingestStatus').innerHTML=`<span class="ok">✓ Selesai dalam ${(d.elapsed_ms/1000).toFixed(1)} detik</span>`;
+    $('ingestStats').innerHTML=[
+      [d.pages,'halaman'],[d.sections.sections,'section'],
+      [d.captions,'caption visual'],[d.chunks,'chunk'],
+      [d.indexed,'terindeks']].map(x=>`<div class="stat"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
+    if(d.caption_errors&&d.caption_errors.length)
+      $('ingestStatus').innerHTML+=`<br><span class="warn">⚠ ${d.caption_errors.length} halaman tanpa caption VLM (dilanjutkan tanpa visual)</span>`;
+    loadKB();
+  }catch(e){
+    $('ingestStatus').innerHTML=`<span class="bad">✗ Gagal: ${e.message}</span>`;
+  }
+  $('ingestBtn').disabled=false;
+};
+
+async function ask(){
+  const q=$('q').value.trim();
+  if(!q){$('answer').style.display='block';$('answer').textContent='Tulis pertanyaannya dulu ya.';return;}
+  $('askBtn').disabled=true;
+  $('answer').style.display='block';
+  $('answer').innerHTML='<span class="spin"></span>Menjawab…';
+  $('srcs').innerHTML='';$('hits').innerHTML='';$('ctxBox').innerHTML='';$('qMeta').textContent='';
+  try{
+    const d=await (await fetch('/api/query',{method:'POST',
+      headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})})).json();
+    if(d.answer){
+      $('answer').textContent=d.answer;
+      $('srcs').innerHTML=d.sources.map(s=>`<span class="src">📄 Hal ${s.page} · ${s.type}</span>`).join('');
+      const ctxs=d.contexts||[];
+      if(ctxs.length){
+        $('ctxBox').innerHTML='<details class="ctx"><summary>🔍 Konteks yang digunakan — debugging retrieval ('+ctxs.length+' chunk)</summary>'
+          +ctxs.map(c=>`<div class="ctxitem"><b>📄 Hal ${c.page} · ${c.type}</b><br>${c.content.slice(0,260)}…</div>`).join('')+'</details>';
+      }
+    }else{
+      $('answer').innerHTML='<b style="color:var(--warn)">Mode fallback</b> — LLM sedang tidak tersedia ('+(d.error||'').slice(0,80)+'…). Cuplikan paling relevan:';
+      $('hits').innerHTML=(d.hits||[]).slice(0,3).map(h=>
+        `<div class="hit"><b>📄 Hal ${h.page} · ${h.type}</b><br>${h.content.slice(0,220)}…</div>`).join('');
+      $('srcs').innerHTML=(d.sources||[]).map(s=>`<span class="src">📄 Hal ${s.page}</span>`).join('');
+    }
+    $('qMeta').textContent=`${d.engine} · ${(d.elapsed_ms/1000).toFixed(1)} dtk`;
+  }catch(e){
+    $('answer').innerHTML='<span class="bad">✗ '+e.message+'</span>';
+  }
+  $('askBtn').disabled=false;
+}
+$('askBtn').onclick=ask;
+$('q').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey))ask();});
+</script>
+</body>
+</html>

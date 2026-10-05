@@ -1,0 +1,92 @@
+[
+ {
+  "no": 1,
+  "question": "Apa saja peran Unit Pelindungan Nasabah menurut peraturan POJK No. 22 Tahun 2023?",
+  "expected_page": 7,
+  "pages": [
+   7
+  ],
+  "page_ok": true,
+  "fact_ok": true,
+  "answer": "Berdasarkan ketentuan POJK No. 22 Tahun 2023, Unit Pelindungan Nasabah memiliki tanggung jawab dan peran sebagai berikut:\n\n1. Mensosialisasikan prinsip Pelindungan Nasabah kepada seluruh Pegawai Bank.\n2. Mengoordinasikan perencanaan dan pelaksanaan kepatuhan Bank terhadap ketentuan Pelindungan Nasabah.\n3. Mengoordinasikan pemantauan dan evaluasi pelaksanaan kepatuhan Bank terhadap ketentuan Pelindungan Nasabah.\n4. Melaporkan implementasi serta memberikan rekomendasi perbaikan dan pengembangan kepada Direksi terkait Pelindungan Nasabah.\n5. Mengoordinasikan penyusunan dan penyampaian laporan terkait Pelindungan Nasabah.\n6. Menerima, menangani, dan menyelesaikan pengaduan yang disampaikan oleh nasabah.\n7. Menyusun materi penanganan pengaduan yang akan dicantumkan dalam laporan tahunan, laman (*website*), dan/atau media lain yang dikelola secara resmi oleh Bank.\n8. Menjadi penghubung penanganan pengaduan yang disampaikan nasabah kepada Otoritas Jasa Keuangan (OJK) dan/atau otoritas lainnya.\n9. Menjalankan kegiatan untuk meningkatkan Literasi dan Inklusi Keuangan.",
+  "engine": "langgraph+gemini",
+  "error": null,
+  "elapsed_ms": 70232.8
+ },
+ {
+  "no": 2,
+  "question": "Jika Bank Mandiri menggunakan jasa Perusahaan Jasa Penagihan untuk menagih debitur, apakah penagihan boleh dilakukan pada jam 21.00?",
+  "expected_page": 7,
+  "pages": [
+   7
+  ],
+  "page_ok": true,
+  "fact_ok": true,
+  "answer": "Tidak boleh. Berdasarkan aturan yang berlaku, penagihan hanya dapat dilakukan pada pukul 08.00 sampai dengan pukul 20.00 waktu wilayah domisili debitur. Oleh karena itu, penagihan pada pukul 21.00 dilarang.",
+  "engine": "langgraph+gemini",
+  "error": null,
+  "elapsed_ms": 61470.0
+ },
+ {
+  "no": 3,
+  "question": "Berapa nominal dan persentase pertumbuhan kredit yang diberikan di sektor tambang dan konstruksi?",
+  "expected_page": 4,
+  "pages": [
+   4
+  ],
+  "page_ok": true,
+  "fact_ok": true,
+  "answer": "Berikut adalah data nominal dan persentase pertumbuhan kredit untuk sektor tambang dan konstruksi (dalam Rp juta):\n\n*   **Sektor Tambang**: Pertumbuhan nominal sebesar **Rp11.614.853** dengan persentase pertumbuhan sebesar **7,98%**. Nilai kredit meningkat dari Rp145.571.176 pada tahun 2024 menjadi Rp157.186.029 pada tahun 2025.\n*   **Sektor Konstruksi**: Pertumbuhan nominal sebesar **Rp8.264.848** dengan persentase pertumbuhan sebesar **8,27%**. Nilai kredit meningkat dari Rp99.883.788 pada tahun 2024 menjadi Rp108.148.636 pada tahun 2025.",
+  "engine": "langgraph+gemini",
+  "error": null,
+  "elapsed_ms": 63372.4
+ },
+ {
+  "no": 4,
+  "question": "Sebutkan presentase komposisi dana pihak ketiga (DPK) di Bank Mandiri pada tahun 2024 dan 2025?",
+  "expected_page": 6,
+  "pages": [
+   6,
+   7,
+   5,
+   4,
+   8
+  ],
+  "page_ok": true,
+  "fact_ok": true,
+  "answer": "Presentase komposisi Dana Pihak Ketiga (DPK) Bank Mandiri pada tahun 2024 dan 2025 adalah sebagai berikut:\n\n**Komposisi Tahun 2024:**\n*   **Giro dan Giro Wadiah:** 39,31%\n*   **Tabungan dan Tabungan Wadiah:** 40,12%\n*   **Deposito Berjangka:** 20,57%\n\n**Komposisi Tahun 2025:**\n*   **Giro dan Giro Wadiah:** 36,66%\n*   **Tabungan dan Tabungan Wadiah:** 34,23%\n*   **Deposito Berjangka:** 29,11%\n\nSecara keseluruhan, pada Desember 2025, pendanaan berbiaya murah atau CASA (yang terdiri dari giro dan tabungan) mencapai 70,89% dari total DPK.",
+  "engine": "langgraph+gemini",
+  "error": null,
+  "elapsed_ms": 57130.9
+ },
+ {
+  "no": 5,
+  "question": "Bagaimana alur penganganan nasabah di bank mandiri jika terdapat laporan pengaduan?",
+  "expected_page": 8,
+  "pages": [
+   9,
+   8
+  ],
+  "page_ok": true,
+  "fact_ok": true,
+  "answer": "Alur penanganan pengaduan nasabah di Bank Mandiri dilakukan melalui tahapan berikut:\n\n1.  **Penyampaian Pengaduan**: Nasabah menyampaikan keluhan melalui berbagai saluran lisan maupun tertulis yang disediakan, yaitu:\n    *   Mandiri Call 14000 (24 jam).\n    *   Media Sosial: Akun X (@mandiricare dan @bankmandiri), Facebook (Mandiri Care dan Bank Mandiri), serta Instagram (@bankmandiri).\n    *   WhatsApp MITA: 0811-8414-000.\n    *   Website: www.bankmandiri.co.id (menu \"contact us\").\n    *   Email: mandiricare@bankmandiri.co.id.\n    *   Kantor Cabang Bank Mandiri di seluruh Indonesia.\n    *   Surat resmi yang dikirim melalui pos atau diantar langsung.\n\n2.  **Pengelolaan oleh Unit Khusus**: Pengaduan ditangani oleh **Customer Care Group**, yaitu unit khusus yang bertugas mengelola serta memantau penyelesaian pengaduan sesuai dengan *Service Level Agreement* (SLA) yang berlaku.\n\n3.  **Proses Verifikasi dan Investigasi**:\n    *   Petugas menerima pengaduan dan melakukan verifikasi.\n    *   Pengaduan di-input ke dalam sistem pengaduan.\n    *   Dilakukan investigasi terhadap permasalahan yang dilaporkan.\n    *   Pihak bank membuat keputusan berdasarkan hasil investigasi.\n\n4.  **Penyelesaian**:\n    *   Petugas melakukan pembaruan (*update*) hasil investigasi ke dalam sistem.\n    *   Menginformasikan hasil investigasi tersebut kepada nasabah.\n    *   Nasabah menerima hasil akhir dari pengaduan yang diajukan.",
+  "engine": "langgraph+gemini",
+  "error": null,
+  "elapsed_ms": 64935.4
+ },
+ {
+  "no": 6,
+  "question": "Apa saja saluran pengaduan yang disediakan oleh Bank Mandiri?",
+  "expected_page": 9,
+  "pages": [
+   9,
+   8
+  ],
+  "page_ok": true,
+  "fact_ok": true,
+  "answer": "Bank Mandiri menyediakan berbagai saluran pengaduan yang dapat diakses secara lisan maupun tertulis, yaitu:\n\n1.  **Mandiri Call**: 14000 (layanan 24 jam melalui Line).\n2.  **WhatsApp MITA**: 0811-8414-000.\n3.  **Email**: mandiricare@bankmandiri.co.id.\n4.  **Website**: www.bankmandiri.co.id dengan memilih menu \"contact us\".\n5.  **Media Sosial**:\n    *   **Akun X**: mandiricare dan @bankmandiri.\n    *   **Akun Facebook**: \"Mandiri Care\" dan \"Bank Mandiri\".\n    *   **Akun Instagram**: @bankmandiri.\n6.  **Kantor Cabang Bank**: Tersedia di seluruh Indonesia.\n7.  **Surat Resmi**: Ditujukan kepada Bank Mandiri, baik yang diantar langsung maupun dikirim melalui pos.\n8.  **Whistleblowing System – Letter to CEO (WBS-LTC)**: Saluran pelaporan yang dikelola oleh pihak ketiga independen untuk memastikan pengelolaan yang profesional dan bebas dari benturan kepentingan.\n\nSeluruh pengaduan tersebut dikelola dan dipantau penyelesaiannya oleh unit khusus bernama **Customer Care Group** sesuai dengan *Service Level Agreement* (SLA) yang berlaku.",
+  "engine": "langgraph+gemini",
+  "error": null,
+  "elapsed_ms": 62596.7
+ }
+]

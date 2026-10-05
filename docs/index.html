@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Engineer Technical Test — Solution Showcase</title>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--card2:#273449;--line:#3b4a63;--ink:#e2e8f0;--muted:#94a3b8;--brand:#14b8a6;--ok:#4ade80}
+*{box-sizing:border-box;margin:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--ink);
+background:radial-gradient(1200px 500px at 70% -10%,#134e4a55,transparent),var(--bg);
+line-height:1.6;padding:24px 16px 60px}
+.wrap{max-width:860px;margin:0 auto}
+.pill{display:inline-block;background:#134e4a;color:#5eead4;font-size:.75rem;font-weight:700;
+letter-spacing:.6px;padding:4px 12px;border-radius:999px;margin-bottom:10px}
+h1{font-size:1.5rem;line-height:1.25}
+h1 small{display:block;color:var(--muted);font-weight:500;font-size:.9rem;margin-top:8px}
+h2{font-size:1.1rem;margin:34px 0 12px;display:flex;gap:8px;align-items:center}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.kpi{background:var(--card2);border-radius:12px;padding:14px;text-align:center}
+.kpi b{display:block;font-size:1.6rem;color:#5eead4}
+.kpi span{font-size:.78rem;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left}
+th{color:#5eead4;font-size:.78rem;text-transform:uppercase;letter-spacing:.5px}
+.ok{color:var(--ok);font-weight:700}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:12px 16px;margin-bottom:10px;cursor:pointer}
+details summary{font-weight:600;font-size:.92rem;list-style-position:inside}
+.pg{color:#5eead4;font-size:.78rem;margin-left:6px;white-space:nowrap}
+.ans{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);
+font-size:.88rem;color:var(--muted);white-space:pre-wrap;cursor:default}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+a.chip{background:var(--card2);border:1px solid var(--line);color:var(--ink);font-size:.82rem;
+font-weight:600;padding:8px 14px;border-radius:999px;text-decoration:none;transition:.15s}
+a.chip:hover{border-color:var(--brand);color:#5eead4}
+pre{background:#0b1222;border:1px solid var(--line);border-radius:10px;padding:14px;
+overflow-x:auto;font-size:.82rem;color:#a5f3fc;line-height:1.7}
+code{color:#5eead4}
+.note{font-size:.8rem;color:var(--muted);margin-top:8px}
+footer{text-align:center;color:var(--muted);font-size:.82rem;margin-top:34px}
+footer a{color:#5eead4;text-decoration:none}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.78rem;margin-top:6px}
+.flow .st{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.flow .ar{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<span class="pill">TECHNICAL TEST · AI ENGINEER INTERN</span>
+<h1>Multimodal RAG &amp; Layout-Aware Text Extraction
+<small>Solusi end-to-end atas dokumen <i>Laporan Keuangan Bank Mandiri 2025</i> dan slide presentasi — FastAPI · LangGraph · ChromaDB · Gemini VLM · RapidOCR</small></h1>
+</header>
+
+<div class="grid">
+<div class="kpi"><b>6/6</b><span>soal evaluasi — halaman sumber benar</span></div>
+<div class="kpi"><b>6/6</b><span>substansi jawaban lengkap</span></div>
+<div class="kpi"><b>±5,5 dtk</b><span>ingestion 9 halaman (multimodal)</span></div>
+<div class="kpi"><b>5/5</b><span>slide → HTML (QA posisi maks 0,96%)</span></div>
+</div>
+
+<h2>🏆 A. Multimodal Retrieval Augmented Generation (RAG) — Hasil Evaluasi 6 Pertanyaan Resmi</h2>
+<div class="card">
+<table>
+<tr><th>#</th><th>Pertanyaan (ringkas)</th><th>Sumber</th><th>Halaman</th><th>Substansi</th></tr>
+<tr><td>1</td><td>Peran Unit Pelindungan Nasabah (POJK 22/2023)</td><td>Hal 7</td><td class="ok">✓</td><td class="ok">✓</td></tr>
+<tr><td>2</td><td>Penagihan boleh jam 21.00?</td><td>Hal 7</td><td class="ok">✓</td><td class="ok">✓</td></tr>
+<tr><td>3</td><td>Pertumbuhan kredit tambang &amp; konstruksi</td><td>Hal 4</td><td class="ok">✓</td><td class="ok">✓</td></tr>
+<tr><td>4</td><td>Komposisi DPK 2024 &amp; 2025 (chart)</td><td>Hal 6</td><td class="ok">✓</td><td class="ok">✓</td></tr>
+<tr><td>5</td><td>Alur penanganan pengaduan (infografis)</td><td>Hal 8</td><td class="ok">✓</td><td class="ok">✓</td></tr>
+<tr><td>6</td><td>Saluran pengaduan (gambar daftar)</td><td>Hal 9</td><td class="ok">✓</td><td class="ok">✓</td></tr>
+</table>
+<p class="note">Klik untuk melihat jawaban lengkap yang dihasilkan sistem:</p>
+<details><summary>1. Apa saja peran Unit Pelindungan Nasabah menurut peraturan POJK No. 22 Tahun 2023? <span class="pg">📄 Hal 7</span></summary><div class="ans">Berdasarkan ketentuan POJK No. 22 Tahun 2023, Unit Pelindungan Nasabah memiliki tanggung jawab dan peran sebagai berikut:
+
+1. Mensosialisasikan prinsip Pelindungan Nasabah kepada seluruh Pegawai Bank.
+2. Mengoordinasikan perencanaan dan pelaksanaan kepatuhan Bank terhadap ketentuan Pelindungan Nasabah.
+3. Mengoordinasikan pemantauan dan evaluasi pelaksanaan kepatuhan Bank terhadap ketentuan Pelindungan Nasabah.
+4. Melaporkan implementasi serta memberikan rekomendasi perbaikan dan pengembangan kepada Direksi terkait Pelindungan Nasabah.
+5. Mengoordinasikan penyusunan dan penyampaian laporan terkait Pelindungan Nasabah.
+6. Menerima, menangani, dan menyelesaikan pengaduan yang disampaikan oleh nasabah.
+7. Menyusun materi penanganan pengaduan yang akan dicantumkan dalam laporan tahunan, laman (*website*), dan/atau media lain yang dikelola secara resmi oleh Bank.
+8. Menjadi penghubung penanganan pengaduan yang disampaikan nasabah kepada Otoritas Jasa Keuangan (OJK) dan/atau otoritas lainnya.
+9. Menjalankan kegiatan untuk meningkatkan Literasi dan Inklusi Keuangan.</div></details>
+<details><summary>2. Jika Bank Mandiri menggunakan jasa Perusahaan Jasa Penagihan untuk menagih debitur, apakah penagihan boleh dilakukan pada jam 21.00? <span class="pg">📄 Hal 7</span></summary><div class="ans">Tidak boleh. Berdasarkan aturan yang berlaku, penagihan hanya dapat dilakukan pada pukul 08.00 sampai dengan pukul 20.00 waktu wilayah domisili debitur. Oleh karena itu, penagihan pada pukul 21.00 dilarang.</div></details>
+<details><summary>3. Berapa nominal dan persentase pertumbuhan kredit yang diberikan di sektor tambang dan konstruksi? <span class="pg">📄 Hal 4</span></summary><div class="ans">Berikut adalah data nominal dan persentase pertumbuhan kredit untuk sektor tambang dan konstruksi (dalam Rp juta):
+
+*   Sektor Tambang: Pertumbuhan nominal sebesar Rp11.614.853 dengan persentase pertumbuhan sebesar 7,98%. Nilai kredit meningkat dari Rp145.571.176 pada tahun 2024 menjadi Rp157.186.029 pada tahun 2025.
+*   Sektor Konstruksi: Pertumbuhan nominal sebesar Rp8.264.848 dengan persentase pertumbuhan sebesar 8,27%. Nilai kredit meningkat dari Rp99.883.788 pada tahun 2024 menjadi Rp108.148.636 pada tahun 2025.</div></details>
+<details><summary>4. Sebutkan presentase komposisi dana pihak ketiga (DPK) di Bank Mandiri pada tahun 2024 dan 2025? <span class="pg">📄 Hal 6, Hal 7, Hal 5, Hal 4, Hal 8</span></summary><div class="ans">Presentase komposisi Dana Pihak Ketiga (DPK) Bank Mandiri pada tahun 2024 dan 2025 adalah sebagai berikut:
+
+Komposisi Tahun 2024:
+*   Giro dan Giro Wadiah: 39,31%
+*   Tabungan dan Tabungan Wadiah: 40,12%
+*   Deposito Berjangka: 20,57%
+
+Komposisi Tahun 2025:
+*   Giro dan Giro Wadiah: 36,66%
+*   Tabungan dan Tabungan Wadiah: 34,23%
+*   Deposito Berjangka: 29,11%
+
+Secara keseluruhan, pada Desember 2025, pendanaan berbiaya murah atau CASA (yang terdiri dari giro dan tabungan) mencapai 70,89% dari total DPK.</div></details>
+<details><summary>5. Bagaimana alur penganganan nasabah di bank mandiri jika terdapat laporan pengaduan? <span class="pg">📄 Hal 9, Hal 8</span></summary><div class="ans">Alur penanganan pengaduan nasabah di Bank Mandiri dilakukan melalui tahapan berikut:
+
+1.  Penyampaian Pengaduan: Nasabah menyampaikan keluhan melalui berbagai saluran lisan maupun tertulis yang disediakan, yaitu:
+    *   Mandiri Call 14000 (24 jam).
+    *   Media Sosial: Akun X (@mandiricare dan @bankmandiri), Facebook (Mandiri Care dan Bank Mandiri), serta Instagram (@bankmandiri).
+    *   WhatsApp MITA: 0811-8414-000.
+    *   Website: www.bankmandiri.co.id (menu "contact us").
+    *   Email: mandiricare@bankmandiri.co.id.
+    *   Kantor Cabang Bank Mandiri di seluruh Indonesia.
+    *   Surat resmi yang dikirim melalui pos atau diantar langsung.
+
+2.  Pengelolaan oleh Unit Khusus: Pengaduan ditangani oleh Customer Care Group, yaitu unit khusus yang bertugas mengelola serta memantau penyelesaian pengaduan sesuai dengan *Service Level Agreement* (SLA) yang berlaku.
+
+3.  Proses Verifikasi dan Investigasi:
+    *   Petugas menerima pengaduan dan melakukan verifikasi.
+    *   Pengaduan di-input ke dalam sistem pengaduan.
+    *   Dilakukan investigasi terhadap permasalahan yang dilaporkan.
+    *   Pihak bank membuat keputusan berdasarkan hasil investigasi.
+
+4.  Penyelesaian:
+    *   Petugas melakukan pembaruan (*update*) hasil investigasi ke dalam sistem.
+    *   Menginformasikan hasil investigasi tersebut kepada nasabah.
+    *   Nasabah menerima hasil akhir dari pengaduan yang diajukan.</div></details>
+<details><summary>6. Apa saja saluran pengaduan yang disediakan oleh Bank Mandiri? <span class="pg">📄 Hal 9, Hal 8</span></summary><div class="ans">Bank Mandiri menyediakan berbagai saluran pengaduan yang dapat diakses secara lisan maupun tertulis, yaitu:
+
+1.  Mandiri Call: 14000 (layanan 24 jam melalui Line).
+2.  WhatsApp MITA: 0811-8414-000.
+3.  Email: mandiricare@bankmandiri.co.id.
+4.  Website: www.bankmandiri.co.id dengan memilih menu "contact us".
+5.  Media Sosial:
+    *   Akun X: mandiricare dan @bankmandiri.
+    *   Akun Facebook: "Mandiri Care" dan "Bank Mandiri".
+    *   Akun Instagram: @bankmandiri.
+6.  Kantor Cabang Bank: Tersedia di seluruh Indonesia.
+7.  Surat Resmi: Ditujukan kepada Bank Mandiri, baik yang diantar langsung maupun dikirim melalui pos.
+8.  Whistleblowing System – Letter to CEO (WBS-LTC): Saluran pelaporan yang dikelola oleh pihak ketiga independen untuk memastikan pengelolaan yang profesional dan bebas dari benturan kepentingan.
+
+Seluruh pengaduan tersebut dikelola dan dipantau penyelesaiannya oleh unit khusus bernama Customer Care Group sesuai dengan *Service Level Agreement* (SLA) yang berlaku.</div></details>
+
+</div>
+
+<h2>✅ Kesesuaian dengan Spesifikasi</h2>
+<div class="card"><table>
+<tr><th>Spesifikasi (soal)</th><th>Implementasi</th><th></th></tr>
+<tr><td>Endpoint Ingestion: raw PDF → multimodal parsing (teks, tabel, gambar/chart)</td><td>POST /api/ingest — PyMuPDF (teks+tabel Markdown) + caption VLM Gemini utk chart/infografis</td><td class="ok">✓</td></tr>
+<tr><td>Chunking cerdas agar konteks tidak terputus</td><td>layout-aware: tabel &amp; caption utuh, heading menempel, potong kalimat + overlap</td><td class="ok">✓</td></tr>
+<tr><td>Embedding → Vector Database</td><td>fastembed MiniLM multilingual → ChromaDB (persist + metadata)</td><td class="ok">✓</td></tr>
+<tr><td>Endpoint Query: retrieval → synthesis LLM</td><td>POST /api/query — LangGraph: retrieve → grade → (refine) → synthesize</td><td class="ok">✓</td></tr>
+<tr><td><b>Wajib</b> metadata sumber halaman</td><td>setiap chunk bawa {page}; response memuat sources[{page, type}]</td><td class="ok">✓</td></tr>
+<tr><td>Tech stack: FastAPI · LangChain/LangGraph · Vector DB · LLM/Embedding bebas</td><td>FastAPI ✓ LangGraph ✓ ChromaDB ✓ Gemini + MiniLM</td><td class="ok">✓</td></tr>
+<tr><td>B: Code Pipeline (Python / Jupyter Notebook)</td><td><a href="https://github.com/tixo831/Mandiri-AI/blob/main/part_b_layout_extraction/notebooks/part_b_pipeline.ipynb" style="color:#5eead4">notebooks/part_b_pipeline.ipynb</a> + pipeline/extract.py (CLI)</td><td class="ok">✓</td></tr>
+<tr><td>B: File HTML — Background Layer + Text Layer (&lt;span&gt; top/left/width)</td><td>outputs/slide-01…05.html — span absolut persen + font cqw</td><td class="ok">✓</td></tr>
+<tr><td>B opsional: penanganan teks ganda</td><td>inpainting TELEA + tombol pembanding Background Asli↔Bersih</td><td class="ok">✓</td></tr>
+<tr><td>B opsional: edit teks</td><td>Mode Edit contenteditable + Reset</td><td class="ok">✓</td></tr>
+</table></div>
+
+<h2>⚙️ Arsitektur</h2>
+<div class="card">
+<b style="font-size:.9rem">Bagian A — Multimodal RAG</b>
+<div class="flow">
+<span class="st">PDF</span><span class="ar">→</span><span class="st">Parsing teks (PyMuPDF)</span><span class="ar">+</span>
+<span class="st">Tabel → Markdown</span><span class="ar">+</span><span class="st">Caption VLM Gemini</span>
+<span class="ar">→</span><span class="st">Chunking layout-aware</span><span class="ar">→</span>
+<span class="st">Embedding MiniLM</span><span class="ar">→</span><span class="st">ChromaDB</span>
+</div>
+<div class="flow" style="margin-top:8px">
+<span class="st">Pertanyaan</span><span class="ar">→</span><span class="st">Retrieve top-8</span><span class="ar">→</span>
+<span class="st">Grade (LangGraph)</span><span class="ar">→</span><span class="st">Synthesize + sitasi halaman</span>
+</div>
+<div style="margin-top:14px"><b style="font-size:.9rem">Bagian B — Layout-Aware Extraction</b>
+<div class="flow">
+<span class="st">Slide 5734px</span><span class="ar">→</span><span class="st">Downscale</span><span class="ar">→</span>
+<span class="st">OCR RapidOCR (bbox)</span><span class="ar">→</span><span class="st">Style (warna/ukuran/bold)</span>
+<span class="ar">→</span><span class="st">Inpainting anti-duplikasi</span><span class="ar">→</span><span class="st">HTML overlay</span>
+</div></div>
+</div>
+
+<h2>🖼️ B. Layout Aware Text Extraction (Computer Vision) — Demo Interaktif</h2>
+<div class="card">
+<p style="font-size:.88rem;color:var(--muted);margin-bottom:12px">Teks hasil ekstraksi = elemen HTML asli (Text Layer) di atas Background Layer. Buka slide → tombol <b>🖼️ Background</b> (bandingkan asli vs bersih-inpaint) → <b>✏️ Mode Edit</b> → klik teks untuk mengedit tanpa merusak background.</p>
+<div class="links">
+<a class="chip" href="partb/compare.html">📊 Galeri asli vs hasil</a>
+<a class="chip" href="partb/slide-01.html">Slide 1</a>
+<a class="chip" href="partb/slide-02.html">Slide 2</a>
+<a class="chip" href="partb/slide-03.html">Slide 3</a>
+<a class="chip" href="partb/slide-04.html">Slide 4</a>
+<a class="chip" href="partb/slide-05.html">Slide 5</a>
+</div>
+</div>
+
+<h2>▶️ Menjalankan Sendiri (API + Web UI)</h2>
+<div class="card">
+<pre>git clone https://github.com/tixo831/Mandiri-AI.git
+cd Mandiri-AI/part_a_multimodal_rag
+pip install -r requirements.txt
+
+# isi Gemini API key (gratis: aistudio.google.com/apikey)
+cp ../.env.example .env   # lalu edit GEMINI_API_KEY=...
+
+PYTHONPATH=. uvicorn app.main:app --port 8000
+# buka http://localhost:8000  → web demo (ingest + query + galeri)
+#           http://localhost:8000/docs → Swagger API</pre>
+<p class="note">Halaman ini (GitHub Pages) memuat demo statis Bagian B dan hasil evaluasi; endpoint API aktif saat dijalankan lokal.</p>
+</div>
+
+<footer>
+<a href="https://github.com/tixo831/Mandiri-AI">🐙 github.com/tixo831/Mandiri-AI</a>
+</footer>
+</div>
+</body>
+</html>
